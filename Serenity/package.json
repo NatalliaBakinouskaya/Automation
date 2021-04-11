@@ -1,0 +1,20 @@
+{
+  "name": "serenity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@serenity-js/assertions": "^2.25.9",
+    "@serenity-js/console-reporter": "^2.25.9",
+    "@serenity-js/core": "^2.25.9",
+    "@serenity-js/cucumber": "^2.25.9",
+    "@serenity-js/protractor": "^2.25.9",
+    "@serenity-js/rest": "^2.25.9",
+    "@serenity-js/serenity-bdd": "^2.25.9"
+  }
+}
