@@ -1,3 +1,7 @@
 /Serenity/package-lock.json
 /Serenity/node_modules.json
+<<<<<<< HEAD
 /row_files/**
+=======
+/row_files
+>>>>>>> b03b46d3608c19dddb0ae61088d71137e343d00a
