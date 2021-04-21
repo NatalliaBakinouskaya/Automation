@@ -26,7 +26,7 @@ exports.config = {
         compiler: 'ts:ts-node/register', // interpret step definitions as TypeScript
         // tags: ['@smoke'] //Execution tags, will be executed tests with ALL tags, i.e. if you have ['@smoke', '@1'] then BOTH @smoke and @1 tagged test(s) will run
         // tags: ['@onliner']  
-        tags: ['@onliner_2']
+        // tags: ['@onliner_2','@onliner_3']
     },
 
     serenity: {

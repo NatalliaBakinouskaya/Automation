@@ -1,4 +1,4 @@
-# @onliner_2
+# @onliner_3
 Feature: Footer Feature
 
     Feature for testing Footer
@@ -6,7 +6,7 @@ Feature: Footer Feature
         Given I am on Onliner page
         When I click company
         Then I see companyUrl
-        
+
         # When I click <link>
         # Then I see <linked_url>
         # Examples:
