@@ -25,7 +25,8 @@ exports.config = {
         format: 'pretty', // enable console output
         compiler: 'ts:ts-node/register', // interpret step definitions as TypeScript
         // tags: ['@smoke'] //Execution tags, will be executed tests with ALL tags, i.e. if you have ['@smoke', '@1'] then BOTH @smoke and @1 tagged test(s) will run
-        // tags: ['@onliner']
+        // tags: ['@onliner']  
+        tags: ['@onliner_2']
     },
 
     serenity: {
@@ -75,7 +76,7 @@ exports.config = {
         maxInstances: 1,
         chromeOptions: {
             //Standard mode
-            args: ["--window-size=1920,1080"]
+            // args: ["--window-size=1920,1080"]
                 //-----------------------------------------
                 //Headless Mode
                 //-----------------------------------------
