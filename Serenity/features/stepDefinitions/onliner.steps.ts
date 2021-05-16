@@ -52,9 +52,4 @@ export = function featureSteps() {
     this.Then(/^I see companyUrl$/, async () => {
         await footer.CompanyUrl(); 
     });
-
-    // this.When(/^I click "(.*)"$/, async (link: any) => {
-    //     await footer.CompanyLink(); 
-    // });
-
 }
