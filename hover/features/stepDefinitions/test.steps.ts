@@ -60,13 +60,8 @@ export = function tutSteps() {
         await onliner.hoverBaracholka();
     });
 
-    this.Then(/^I see MinskLink$/, async () => {
+    this.Then(/^I see City$/, async () => {
         await onliner.checkCityLink();
-    });
-
-    this.Then(/^I see (.*?)$/, async (city:string) => {
-        await onliner.checkThreeCityLinks(city);
-        
     });
 }
  

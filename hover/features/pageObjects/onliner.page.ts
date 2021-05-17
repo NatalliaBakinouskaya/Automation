@@ -23,19 +23,13 @@ export class OnlinerPage {
     }
 
     public async checkCityLink() {
-        // await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");
-        console.log("Baracholka+")
+        await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Minsk not found");
+        await console.log("Minsk found");
+        await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMahiliouLink), defaultTimeout, "Mahiliou not found");
+        await console.log("Mahiliou found")
+        await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaHomelLink), defaultTimeout, "Homel not found");
+        await console.log("Homel found")
     }
     
-    public async checkThreeCityLinks(City:string) {
-        console.log(City);
-        let CityFound: ElementFinder = await element(by.xpath(City));
-        await browser.wait(ExpectedConditions.visibilityOf(await CityFound), defaultTimeout, "Link wasn't loaded or has incorrect locator");
-        // if(City == "Minsk"){
-        //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");
-        //     await console.log("MINSK FOUND");
-        // }
-        
-    }
     
 }
