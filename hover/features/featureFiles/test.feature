@@ -20,8 +20,21 @@ Feature: Test
     When  I check "Финансы" on homePage
     Then I select "Конвертер валют_1" on tutFinancePage
 
-    @smoke
+    # @smoke
     Scenario: Small tests + hover
     Given I am on Onliner page
     When  Mouse over Baracholka
     Then I see MinskLink
+
+    @smoke
+    Scenario Outline: Small tests + hover
+    Given I am on Onliner page
+    When  Mouse over Baracholka
+    Then I see "<cityLink>"
+
+    Examples:
+            | Input              |
+            | Minsk              |
+            # | Homel              |
+            # | Mahiliou           |
+           

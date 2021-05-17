@@ -1,4 +1,4 @@
-import { browser, by, ElementFinder, ExpectedConditions } from "protractor";
+import { browser, by, element, ElementFinder, ExpectedConditions } from "protractor";
 import { OnlinerRepository } from "../objectRepository/onliner.obj";
 import { TutRepository } from "../objectRepository/tut.obj";
 
@@ -23,7 +23,19 @@ export class OnlinerPage {
     }
 
     public async checkCityLink() {
-        await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");
+        // await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");
+        console.log("Baracholka+")
+    }
+    
+    public async checkThreeCityLinks(City:string) {
+        console.log(City);
+        let CityFound: ElementFinder = await element(by.xpath(City));
+        await browser.wait(ExpectedConditions.visibilityOf(await CityFound), defaultTimeout, "Link wasn't loaded or has incorrect locator");
+        // if(City == "Minsk"){
+        //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");
+        //     await console.log("MINSK FOUND");
+        // }
+        
     }
     
 }

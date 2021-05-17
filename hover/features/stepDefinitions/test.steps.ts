@@ -1,3 +1,5 @@
+import { expect } from "chai";
+import { browser, ElementFinder, ExpectedConditions } from "protractor";
 import { BrowserHacks } from "../../support/browserHacks";
 import { OnlinerPage } from "../pageObjects/onliner.page";
 import { TutPage } from "../pageObjects/tut.page";
@@ -60,6 +62,11 @@ export = function tutSteps() {
 
     this.Then(/^I see MinskLink$/, async () => {
         await onliner.checkCityLink();
+    });
+
+    this.Then(/^I see (.*?)$/, async (city:string) => {
+        await onliner.checkThreeCityLinks(city);
+        
     });
 }
  
