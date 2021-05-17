@@ -1,4 +1,5 @@
 import { BrowserHacks } from "../../support/browserHacks";
+import { OnlinerPage } from "../pageObjects/onliner.page";
 import { TutPage } from "../pageObjects/tut.page";
 
 export = function tutSteps() {
@@ -11,6 +12,7 @@ export = function tutSteps() {
 
     //Loading page object
     let tut = new TutPage;
+    let onliner = new OnlinerPage;
    
     //Hooks
     this.Before(async () => {
@@ -46,6 +48,18 @@ export = function tutSteps() {
 
     this.Then(/^I select "Конвертер валют_1" on tutFinancePage$/, async () => {
         await tut.SelectDDL();
-     });
+    });
+
+    this.Then(/^I am on Onliner page$/, async () => {
+        await onliner.Open();
+    });
+
+    this.Then(/^Mouse over Baracholka$/, async () => {
+        await onliner.hoverBaracholka();
+    });
+
+    this.Then(/^I see MinskLink$/, async () => {
+        await onliner.checkCityLink();
+    });
 }
  

@@ -14,8 +14,14 @@ Feature: Test
     When  I check "Финансы" on homePage
     Then I select "Осталась на том же уровне" on tutFinancePage
 
-    @smoke
+    # @smoke
     Scenario: Small tests + DDL
     Given I am on Tut page
     When  I check "Финансы" on homePage
     Then I select "Конвертер валют_1" on tutFinancePage
+
+    @smoke
+    Scenario: Small tests + hover
+    Given I am on Onliner page
+    When  Mouse over Baracholka
+    Then I see MinskLink
