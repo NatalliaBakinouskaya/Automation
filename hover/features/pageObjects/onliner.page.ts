@@ -1,3 +1,4 @@
+import { TableDefinition } from "cucumber";
 import { browser, by, element, ElementFinder, ExpectedConditions } from "protractor";
 import { OnlinerRepository } from "../objectRepository/onliner.obj";
 import { TutRepository } from "../objectRepository/tut.obj";
@@ -30,6 +31,15 @@ export class OnlinerPage {
         await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaHomelLink), defaultTimeout, "Homel not found");
         await console.log("Homel found")
     }
-    
-    
+
+    public async checkCityLinks(table: TableDefinition) {
+        let row: any = table.rows();
+        for(let i = 0; i < row.length; i++){
+      
+            let Searchelement = element(by.xpath(row[i][0]));
+            await browser.wait(ExpectedConditions.visibilityOf(await Searchelement),3000, `${row[i][1]} not found`);
+            await console.log(`${row[i][1]} found`);
+
+        }
+    }
 }

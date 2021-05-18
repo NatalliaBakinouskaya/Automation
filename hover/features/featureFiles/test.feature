@@ -1,4 +1,4 @@
-@smoke
+# @smoke
 Feature: Test 
 
     Test for education purposes only
@@ -20,9 +20,20 @@ Feature: Test
     When  I check "Финансы" on homePage
     Then I select "Конвертер валют_1" on tutFinancePage
 
-    # @smoke 
+    @smoke 
     Scenario: Small tests + hover
     Given I am on Onliner page
     When  Mouse over Baracholka
     Then I see City
+
+    @smoke 
+    Scenario: Small tests + hover
+    Given I am on Onliner page
+    When  Mouse over Baracholka
+    Then I see table
+        | CityLink | Cityname |
+        | //a[@href="https://ab.onliner.by/city/minsk"]/child::span[contains(text(), "Минск")]| Minsk |
+        | //a[@href="https://ab.onliner.by/city/mogilev"]/child::span[contains(text(), "Могилев")]| Mahiliou |
+        | //a[@href="https://ab.onliner.by/city/gomel"]/child::span[contains(text(), "Гомель")]| Homel |
+       
            

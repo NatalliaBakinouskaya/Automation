@@ -13,7 +13,7 @@ export class TutPage {
     //Methods as actions on page then
     public async Open() {
         browser.navigate().to(browser.params.tutByURL);
-        await browser.wait(ExpectedConditions.urlContains("https://www.tut.by/"), defaultTimeout, "URL wasn't changed");
+        await browser.wait(ExpectedConditions.urlContains("https://www.tut.by"), defaultTimeout, "URL wasn't changed");
     }
 
     public async HoverTxt() {
