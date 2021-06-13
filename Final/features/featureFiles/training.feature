@@ -16,7 +16,7 @@ Feature: Training
     Then I put response to console output
     
     @smoke
-    Scenario Outline: I can find my Citys on 21vek
+    Scenario Outline: I can find my City on 21vek (DDL)
     Given I am on 21 vek page
     When  I Click <Citylink> & enter city name
     Then I swith to "<city>" page
@@ -25,7 +25,29 @@ Feature: Training
             | Гомель     |г. Гомель  |
             | Минск    | г. Минск |
             | Могилев    | г. Могилев |
+            | Витебск    | г. Витебск |
             | аг. Париж    | аг. Париж|
-           
+
+    @smoke
+    Scenario: Links are clicable
+    Given I am on 21 vek page
+    Then  Link is clicable
+
+            | link | 
+            | button.styles_localityBtn__3_asA|
+            | a[href="/special_offers/partly_pay.html"]  |
+            | a[href="/special_offers/bonus.html"]  |
+    @smoke    
+    Scenario Outline: I can find offers (Checkboxes)
+    Given I am on 21 vek page
+    When  I click Offer link
+    Then I check "<checkbox>"
+    Then At least one product is present
+    Examples:
+            | checkbox | 
+            | Товары со скидкой   |
+            | Товары с подарками   | 
+            | Суперцена    | 
+          
     
     

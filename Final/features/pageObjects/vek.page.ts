@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import { TableDefinition } from "cucumber";
 import { browser, by, element, ElementFinder, ExpectedConditions, Key, promise } from "protractor";
 import { OnlinerRepository } from "../objectRepository/onliner.obj";
@@ -17,31 +18,7 @@ export class VekPage {
         browser.navigate().to(browser.params.vek21ByURL);
         await browser.wait(ExpectedConditions.urlContains("https://www.21vek.by/"), defaultTimeout, "URL was changed");
     }
-
-    // public async SwitchCity() {
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.vekHomeCityButton), defaultTimeout, "City link not found");
-    //     await this.vekRepo.vekHomeCityButton.click();
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.vekHomeCityInput), defaultTimeout, "Input  field not found");
-    //     await browser.actions().doubleClick(this.vekRepo.vekHomeCityInput).sendKeys(Key.BACK_SPACE).perform();
-    //     await this.vekRepo.vekHomeCityInput.sendKeys("Гомель");
-
-        // await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.vekHomeCityButton), defaultTimeout, "City link not found");
-        // await browser.sleep(6000);
-
-        // console.log("aldj")
-    // }
-    // public async CheckCity() {
-    //     let elem :  ElementFinder = element(by.xpath('//div[@id="dropdown-0"]//child::div[normalize-space(text())="г.Гомель"]'))
-    //     await browser.wait(ExpectedConditions.visibilityOf(await elem), defaultTimeout, "City link not found");
-    //     elem.click();
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.vekHomeCitySave), defaultTimeout, "Save Button not found");
-    //     await this.vekRepo.vekHomeCitySave.click();
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.vekHomeCityButton), defaultTimeout, "City link not found");
-    //     await browser.wait(ExpectedConditions.textToBePresentInElement(this.vekRepo.vekHomeCityButton, 'Гомель'), defaultTimeout, "City page not found");
-        
-        
-    //     await browser.sleep(6000);
-    // }
+   
     public async SwitchEachCity(cityName: string): promise.Promise<void> {
         
         await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.vekHomeCityButton), defaultTimeout, "City link not found");
@@ -61,7 +38,40 @@ export class VekPage {
         await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.vekHomeCityButton), defaultTimeout, "City link not found");
         await browser.wait(ExpectedConditions.textToBePresentInElement(this.vekRepo.vekHomeCityButton, cityName), defaultTimeout, "City page not found");
     }
-
+    public async LinkClicable(table: TableDefinition) {
+        let row: any = table.rows();
+        for(let i = 0; i < row.length; i++){
+      
+            let Searchelement_1 = element(by.css(row[i][0]));
+            await browser.wait(ExpectedConditions.visibilityOf(await Searchelement_1),3000, `${row[i][1]} not found`);
+            await browser.wait(ExpectedConditions.elementToBeClickable(Searchelement_1), defaultTimeout, "Link doesn,t work");
+            
+        }
+        
+        
+    }
+    public async ShowOffers()  {
+        
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.offersLink), defaultTimeout, "Offers link not found")
+        this.vekRepo.offersLink.click();
+        await browser.wait(ExpectedConditions.urlContains("https://www.21vek.by/special_offers/promo.html"), defaultTimeout, "URL was changed")
+  
+        
+    }
+    
+    public async CheckOfferBox(offerName: string): promise.Promise<void> {
+        let elem :  ElementFinder = element(by.xpath(`//span[contains(text(), "${offerName}")]/preceding-sibling::div`))
+        await browser.wait(ExpectedConditions.visibilityOf(await elem), defaultTimeout, "Checkbox not found");
+        await elem.click();
+        
+        
+    }
+    public async CheckProduckAvailability()  {
+        
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.productItem), defaultTimeout, "Products not found")
+        
+        
+    }
 
     // public async hoverBaracholka() {
     //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.onlinerBaracholkaLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");

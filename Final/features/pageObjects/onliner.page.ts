@@ -3,6 +3,7 @@ import { browser, by, element, ElementFinder, ExpectedConditions } from "protrac
 import { OnlinerRepository } from "../objectRepository/onliner.obj";
 
 const defaultTimeout = browser.params.defaultTimeout;
+let Searchelement_1: any;
 
 export class OnlinerPage {
     onlinerRepo: OnlinerRepository;
@@ -10,7 +11,7 @@ export class OnlinerPage {
     constructor() {
         this.onlinerRepo = new OnlinerRepository;
     }
-
+    
     //Methods as actions on page then
     public async Open() {
         browser.navigate().to(browser.params.onlinerByURL);

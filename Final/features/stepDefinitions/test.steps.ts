@@ -31,42 +31,9 @@ export = function tutSteps() {
 
     //Given expression, can only be used with Given in .feature file
    
-    // this.Then(/^I am on Onliner page$/, async () => {
-    //     await vek.Open();
-    // });
-
-    // this.Then(/^Mouse over Baracholka$/, async () => {
-    //     await onliner.hoverBaracholka();
-    // });
-
-    // this.Then(/^I see City$/, async () => {
-    //     await onliner.checkCityLink();
-    // });
-
-    // this.Then(/^I see table$/, async (tab: TableDefinition) => {
-    //     await onliner.checkCityLinks(tab);
-       
-    // });
-
-    // this.Then(/^I search "(.*?)" in catalog$/, async (val:string) => {
-    //     await onliner.searchIphone(val);
-    // });
-
-    // this.Then(/^I see element$/, async () => {
-    //     await onliner.checkIphone();
-    // });
-
     this.Given(/^I am on 21 vek page$/, async () => {
         await vek.Open();
     });
-
-    // this.When(/^I Click City link & enter Paris$/, async () => {
-    //     await vek.SwitchCity();
-    // });
-    
-    // this.Then(/^I don't swith to Paris page$/, async () => {
-    //     await vek.CheckCity();
-    // });
 
     this.When(/^I Click (.*?) & enter city name$/, async (input: string) => {
         await vek.SwitchEachCity(input);
@@ -75,6 +42,20 @@ export = function tutSteps() {
     this.Then(/^I swith to "(.*?)" page$/, async (value) => {
         await vek.CheckEachCity(value);
     });
+    this.Then(/^Link is clicable$/, async (tab: TableDefinition) => {
+        await vek.LinkClicable(tab);
+    });
     
+    this.When(/^I click Offer link$/, async () => {
+        await vek.ShowOffers();
+    });
+
+    this.When(/^I check "(.*?)"$/, async (input: string) => {
+        await vek.CheckOfferBox(input);
+    });
+
+    this.When(/^At least one product is present$/, async () => {
+        await vek.CheckProduckAvailability();
+    });
 }
  
