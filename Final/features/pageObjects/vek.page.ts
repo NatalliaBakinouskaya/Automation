@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { WSAECONNABORTED } from "constants";
 import { TableDefinition } from "cucumber";
 import { browser, by, element, ElementFinder, ExpectedConditions, Key, promise } from "protractor";
 import { OnlinerRepository } from "../objectRepository/onliner.obj";
@@ -70,13 +71,44 @@ export class VekPage {
         
         await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.productItem), defaultTimeout, "Products not found")
         
-        
     }
+    public async OpenMobilePage() {
+        browser.navigate().to("https://www.21vek.by/mobile/");
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.smartPhoneHeader), defaultTimeout, "Phones not found");
+    }
+    
+    public async AddFirstItemToCart() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.AddToCart), defaultTimeout, "Phones not found");
+        await this.vekRepo.AddToCart.click();
+        // Problem #1 Items are sometimes not added to the cart. Browser sleep helped(
+        await browser.sleep(3000);
+    }
+
+    public async GoToCart() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.GoToCartButton ), defaultTimeout, "Phones not found");
+        await this.vekRepo.GoToCartButton.click();
+    }
+
+    public async Checkout() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.CheckoutButton ), defaultTimeout, "Phones not found");
+        await this.vekRepo.CheckoutButton.click();
+    }
+
+    public async SelectShippingMethod() {
+        await browser.wait(ExpectedConditions.presenceOf(await this.vekRepo.SelectShippingRadio_1), defaultTimeout, "Radio button not found");
+        await browser.wait(ExpectedConditions.presenceOf(await this.vekRepo.SelectShippingRadio_2), defaultTimeout, "Radio button not found");
+        
+        await browser.executeScript("arguments[0].click();", this.vekRepo.SelectShippingRadio_2.getWebElement());
+        
+        await console.log(await this.vekRepo.SelectShippingRadio_1.isSelected());
+        await console.log(await this.vekRepo.SelectShippingRadio_2.isSelected());
+    
+        
 
     // public async hoverBaracholka() {
     //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.onlinerBaracholkaLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");
     //     await browser.actions().mouseMove(this.onlinerRepo.onlinerBaracholkaLink).perform(); 
-    // }
+    }
 
     // public async checkCityLink() {
     //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Minsk not found");

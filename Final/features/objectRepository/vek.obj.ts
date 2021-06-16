@@ -7,6 +7,13 @@ export class VekRepository {
     readonly vekHomeCitySave: ElementFinder = element(by.xpath("//button[contains(text(), 'Сохранить')]"))
     readonly offersLink: ElementFinder = element(by.xpath("(//*[contains(text(), 'Скидки, суперцены')])[1]"))
     readonly productItem: ElementFinder = element(by.xpath(`(//div[@class = "style_rootProduct__UjCzM style_product__irNOY"])[1]`))
+    readonly smartPhoneHeader: ElementFinder = element(by.xpath("//h1[contains(text(), 'Смартфоны')]"))
+    readonly AddToCart: ElementFinder = element(by.xpath(`(//button[contains(text(), "В корзину")])[1]`));
+    readonly GoToCartButton: ElementFinder = element(by.cssContainingText(".headerCartBox", "Корзина"));
+    readonly CheckoutButton: ElementFinder = element(by.cssContainingText("span", "Оформить заказ"));
+    readonly SelectShippingRadio_1: ElementFinder = element(by.xpath(`//input[@value="courier"]`));
+    readonly SelectShippingRadio_2: ElementFinder = element(by.xpath(`//input[@value="self"]`));
+    readonly LabelShippingRadio_2: ElementFinder = element(by.xpath(`//*[@id="delivery_self"]`));
     // readonly onlinerBaracholkaLink:ElementFinder = element(by.xpath('//span[@class="b-main-navigation__text"]/parent::a[@href ="https://ab.onliner.by"]'));
     // readonly baraholkaMinskLink:ElementFinder = element(by.xpath('//a[@href="https://ab.onliner.by/city/minsk"]/child::span[contains(text(), "Минск")]'));
     // readonly baraholkaMahiliouLink:ElementFinder = element(by.xpath('//a[@href="https://ab.onliner.by/city/mogilev"]/child::span[contains(text(), "Могилев")]'));

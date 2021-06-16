@@ -57,5 +57,22 @@ export = function tutSteps() {
     this.When(/^At least one product is present$/, async () => {
         await vek.CheckProduckAvailability();
     });
+
+    this.When(/^I am on 21 vek-smartphones page$/, async () => {
+        await vek.OpenMobilePage();
+    });
+    this.When(/^I add the first item to the cart$/, async () => {
+        await vek.AddFirstItemToCart();
+    });
+
+    this.When(/^I go to the cart$/, async () => {
+        await vek.GoToCart();
+    });
+    this.When(/^I checkout$/, async () => {
+        await vek.Checkout();
+    });
+    this.When(/^I can select Shipping method$/, async () => {
+        await vek.SelectShippingMethod();
+    });
 }
  
