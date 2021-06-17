@@ -1,8 +1,6 @@
 import { expect } from "chai";
-import { WSAECONNABORTED } from "constants";
 import { TableDefinition } from "cucumber";
 import { browser, by, element, ElementFinder, ExpectedConditions, Key, promise } from "protractor";
-import { OnlinerRepository } from "../objectRepository/onliner.obj";
 import { VekRepository } from "../objectRepository/vek.obj";
 
 const defaultTimeout = browser.params.defaultTimeout;

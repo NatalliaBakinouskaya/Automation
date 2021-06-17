@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { TableDefinition } from "cucumber";
 import { browser, by, element, ElementFinder, ExpectedConditions } from "protractor";
 import { BrowserHacks } from "../../support/browserHacks";
-import { OnlinerPage } from "../pageObjects/onliner.page";
+import { CalorizatorPage } from "../pageObjects/calorizator.page";
 import { VekPage } from "../pageObjects/vek.page";
 
 
@@ -16,6 +16,7 @@ export = function tutSteps() {
 
     //Loading page object
     let vek = new VekPage;
+    let calorizator = new CalorizatorPage;
    
     //Hooks
     this.Before(async () => {
@@ -74,5 +75,18 @@ export = function tutSteps() {
     this.When(/^I can select Shipping method$/, async () => {
         await vek.SelectShippingMethod();
     });
+
+    this.Given(/^I am on Calorizator page$/, async () => {
+        await calorizator.Open();
+    });
+
+    this.Given(/^Click Coffee button$/, async () => {
+        await calorizator.ClickCoffeeButton();
+    });
+
+    this.Given(/^I see default selection$/, async () => {
+        await calorizator.CheckCapuchSelected();
+    });
+
 }
  

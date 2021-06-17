@@ -18,6 +18,7 @@ exports.config = {
         onlinerByURL: "https://www.onliner.by/",
         tutByURL: "https://www.tut.by",
         vek21ByURL:"https://www.21vek.by",
+        calorizatorByURL: "https://calorizator.ru/",
     },
 
 

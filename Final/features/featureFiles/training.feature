@@ -1,5 +1,5 @@
 # @smoke
-Feature: Training
+Feature: Final
 
     Test for training purposes only
 
@@ -15,7 +15,7 @@ Feature: Training
     # When  I perform Post request
     # Then I put response to console output
     
-    @smoke
+#     @smoke
     Scenario Outline: I can find my City on 21vek (DDL)
     Given I am on 21 vek page
     When  I Click <Citylink> & enter city name
@@ -28,7 +28,7 @@ Feature: Training
             | Витебск    | г. Витебск |
             | аг. Париж    | аг. Париж|
 
-    @smoke
+#     @smoke
     Scenario: Links are clicable
     Given I am on 21 vek page
     Then  Link is clicable
@@ -37,7 +37,7 @@ Feature: Training
             | button.styles_localityBtn__3_asA|
             | a[href="/special_offers/partly_pay.html"]  |
             | a[href="/special_offers/bonus.html"]  |
-    @smoke    
+#     @smoke    
     Scenario Outline: I can find offers (Checkboxes)
     Given I am on 21 vek page
     When  I click Offer link
@@ -49,13 +49,22 @@ Feature: Training
             | Товары с подарками   | 
             | Суперцена    | 
           
-    @smoke
+#     @smoke
     Scenario: I can select Shipping options(radio-buttons) 
     Given I am on 21 vek-smartphones page
     When  I add the first item to the cart
     Then I go to the cart
     Then I checkout
     Then I can select Shipping method
+
+    @smoke
+    Scenario: I can test Iframes"
+    Given I am on Calorizator page
+    When  Click Coffee button
+    Then I see default selection
+   
+
+
 
 
 

@@ -69,7 +69,7 @@ export class OnlinerPage {
             console.log(name);
         })
 
-        await browser.switchTo().window(allHandles[1]);
+        await browser.switchTo().window(allHandles[0]);
         await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.onlinerBaracholkaLink), defaultTimeout, "SearchIframe not found");
         await this.onlinerRepo.onlinerBaracholkaLink.click();
         await browser.sleep(9000);
