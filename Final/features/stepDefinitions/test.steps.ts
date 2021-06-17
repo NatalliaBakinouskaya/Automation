@@ -1,6 +1,6 @@
-import { expect } from "chai";
+// import { expect } from "chai";
 import { TableDefinition } from "cucumber";
-import { browser, by, element, ElementFinder, ExpectedConditions } from "protractor";
+// import { browser, by, element, ElementFinder, ExpectedConditions } from "protractor";
 import { BrowserHacks } from "../../support/browserHacks";
 import { CalorizatorPage } from "../pageObjects/calorizator.page";
 import { VekPage } from "../pageObjects/vek.page";
@@ -86,6 +86,10 @@ export = function tutSteps() {
 
     this.Given(/^I see default selection$/, async () => {
         await calorizator.CheckCapuchSelected();
+    });
+
+    this.Then(/^I select (.*?)$/, async (input: string) => {
+        await calorizator.SelectEachCoffee(input);
     });
 
 }

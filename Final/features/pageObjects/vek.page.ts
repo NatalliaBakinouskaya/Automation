@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { TableDefinition } from "cucumber";
 import { browser, by, element, ElementFinder, ExpectedConditions, Key, promise } from "protractor";
 import { VekRepository } from "../objectRepository/vek.obj";
@@ -41,10 +40,13 @@ export class VekPage {
         let row: any = table.rows();
         for(let i = 0; i < row.length; i++){
       
-            let Searchelement_1 = element(by.css(row[i][0]));
+            let Searchelement_1 = element(by.xpath(`(//header//*[text() = ${row[i][0]}])[1]`));
             await browser.wait(ExpectedConditions.visibilityOf(await Searchelement_1),3000, `${row[i][1]} not found`);
             await browser.wait(ExpectedConditions.elementToBeClickable(Searchelement_1), defaultTimeout, "Link doesn,t work");
-            
+            await browser.actions().mouseMove(Searchelement_1).perform();
+            let color = (await Searchelement_1.getAttribute("color"));
+            console.log(`Color of ${row[i][0]} is ${color} on hover`)
+ 
         }
         
         
@@ -96,68 +98,14 @@ export class VekPage {
         await browser.wait(ExpectedConditions.presenceOf(await this.vekRepo.SelectShippingRadio_1), defaultTimeout, "Radio button not found");
         await browser.wait(ExpectedConditions.presenceOf(await this.vekRepo.SelectShippingRadio_2), defaultTimeout, "Radio button not found");
         
+        // Problem #2 How to click not vsible button. Resolved
         await browser.executeScript("arguments[0].click();", this.vekRepo.SelectShippingRadio_2.getWebElement());
         
         await console.log(await this.vekRepo.SelectShippingRadio_1.isSelected());
         await console.log(await this.vekRepo.SelectShippingRadio_2.isSelected());
     
-        
-
-    // public async hoverBaracholka() {
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.onlinerBaracholkaLink), defaultTimeout, "Link wasn't loaded or has incorrect locator");
-    //     await browser.actions().mouseMove(this.onlinerRepo.onlinerBaracholkaLink).perform(); 
+    
     }
 
-    // public async checkCityLink() {
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMinskLink), defaultTimeout, "Minsk not found");
-    //     await console.log("Minsk found");
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaMahiliouLink), defaultTimeout, "Mahiliou not found");
-    //     await console.log("Mahiliou found")
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.baraholkaHomelLink), defaultTimeout, "Homel not found");
-    //     await console.log("Homel found")
-    // }
-
-    // public async checkCityLinks(table: TableDefinition) {
-    //     let row: any = table.rows();
-    //     for(let i = 0; i < row.length; i++){
-      
-    //         let Searchelement = element(by.xpath(row[i][0]));
-    //         await browser.wait(ExpectedConditions.visibilityOf(await Searchelement),3000, `${row[i][1]} not found`);
-    //         await console.log(`${row[i][1]} found`);
-
-    //     }
     
-    // }
-
-    // public async searchIphone(searchItem:string) {
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.searchField), defaultTimeout, "Searchfield not found");
-    //     // await this.onlinerRepo.searchField.sendKeys("Смартфон Apple iPhone 11 128GB Dual SIM (фиолетовый)")
-    //     await this.onlinerRepo.searchField.sendKeys(searchItem);
-    // } 
-
-    // public async checkIphone() {
-    //     // let allHandles = await browser.getAllWindowHandles();
-    //     // allHandles.forEach(function(name){
-    //     //     console.log(name);
-    //     // })
-    //     // console.log(await browser.getAllWindowHandles());
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.catalogIframe), defaultTimeout, "SearchIframe not found");
-    //     await browser.switchTo().frame(this.onlinerRepo.catalogIframe.getWebElement());
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.searchIphone), defaultTimeout, "Iphone ot found");
-    //     await this.onlinerRepo.searchIphone.click();
-    //     await browser.executeScript(`window.open("https://onliner.by")`);
-
-    //     await browser.sleep(3000);
-
-    //     let allHandles = await browser.getAllWindowHandles();
-    //     allHandles.forEach(function(name){
-    //         console.log(name);
-    //     })
-
-    //     await browser.switchTo().window(allHandles[1]);
-    //     await browser.wait(ExpectedConditions.visibilityOf(await this.onlinerRepo.onlinerBaracholkaLink), defaultTimeout, "SearchIframe not found");
-    //     await this.onlinerRepo.onlinerBaracholkaLink.click();
-    //     await browser.sleep(9000);
-
-    // } 
 }

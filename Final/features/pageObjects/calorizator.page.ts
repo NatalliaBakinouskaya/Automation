@@ -1,9 +1,6 @@
-import { expect } from "chai";
-import { TableDefinition } from "cucumber";
-import { browser, by, element, ElementFinder, ExpectedConditions, Key, promise } from "protractor";
+import { browser, by, element, ElementFinder, ExpectedConditions, promise } from "protractor";
 import { CalorizatorRepository } from "../objectRepository/calorizator.ob";
-import { OnlinerRepository } from "../objectRepository/onliner.obj";
-import { VekRepository } from "../objectRepository/vek.obj";
+
 
 const defaultTimeout = browser.params.defaultTimeout;
 
@@ -30,8 +27,10 @@ export class CalorizatorPage {
         await browser.wait(ExpectedConditions.presenceOf(await this.calorizatorRepo.capuchRadioButton), defaultTimeout, "Button");
         await console.log(await this.calorizatorRepo.capuchRadioButton.isSelected());
 
-        await browser.wait(ExpectedConditions.presenceOf(await element(by.xpath(`//*[@id="close"]`))), defaultTimeout, "X");
-        await element(by.xpath(`//*[@id="close"]`)).click();
+        await browser.wait(ExpectedConditions.presenceOf(await this.calorizatorRepo.closeIframeButton), defaultTimeout, "X");
+        await this.calorizatorRepo.closeIframeButton.click();
+        
+        //  Works w/o commented code
         // await browser.switchTo().defaultContent();
 
         // let allHandles = await browser.getAllWindowHandles();
@@ -41,6 +40,19 @@ export class CalorizatorPage {
         // console.log(await browser.getAllWindowHandles());
 
         // await browser.switchTo().window(allHandles[0]);  
+    }
+    public async SelectEachCoffee(coffeeName: string): promise.Promise<void>  {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.calorizatorRepo.coffeeIframe), defaultTimeout, "SearchIframe not found");
+        await browser.switchTo().frame(this.calorizatorRepo.coffeeIframe.getWebElement());
+
+        // Problem #3 div[text() = ${coffeeName})] doesn't work
+        // let elem :  ElementFinder = element(by.xpath(`//div[text() = ${coffeeName})]//preceding-sibling::div//child::*`))
+        let elem :  ElementFinder = element(by.xpath(`//div[contains(text(), ${coffeeName})]//preceding-sibling::div//child::*`))
+        await browser.wait(ExpectedConditions.visibilityOf(await elem), defaultTimeout, "Coffee radio button not found");
+        elem.click();
+
+        await browser.wait(ExpectedConditions.presenceOf(await this.calorizatorRepo.sorry), defaultTimeout, "X");
+        await this.calorizatorRepo.sorry.click();
     }
     
 }
