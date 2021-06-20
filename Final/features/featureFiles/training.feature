@@ -24,9 +24,9 @@ Feature: Final
 
             | link | 
             | "Оплата частями" |
-        #     | "Бонусная программа"|
-        #     | "г. Минск" |
-        #     |"Еще"|
+            | "Бонусная программа"|
+            | "г. Минск" |
+            |"Еще"|"г. Минск"
             
 #     @smoke    
     Scenario Outline: I can find offers (Checkboxes)

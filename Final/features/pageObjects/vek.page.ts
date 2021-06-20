@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import { TableDefinition } from "cucumber";
 import { browser, by, element, ElementFinder, ExpectedConditions, Key, promise } from "protractor";
 import { VekRepository } from "../objectRepository/vek.obj";
@@ -39,12 +40,19 @@ export class VekPage {
     public async LinkClicable(table: TableDefinition) {
         let row: any = table.rows();
         for(let i = 0; i < row.length; i++){
-      
-            let Searchelement_1 = element(by.xpath(`(//header//a[text() = ${row[i][0]}])[1]`));
-            await browser.wait(ExpectedConditions.visibilityOf(await Searchelement_1),3000, `${row[i][1]} not found`);
-            await browser.wait(ExpectedConditions.elementToBeClickable(Searchelement_1), defaultTimeout, "Link doesn,t work");
-            await browser.actions().mouseUp(Searchelement_1).perform();
-            let color = (await Searchelement_1.getCssValue("color"));
+            let Searchelement: ElementFinder;
+            if(row[i][0] !== "г. Минск"){
+                Searchelement = element(by.xpath(`(//header//*[text() = ${row[i][0]}])[1]`));
+            }
+            else{
+                Searchelement = element(by.xpath(`//*[text() = ${row[i][0]}]/parent::*`));
+            }
+
+            // Searchelement = element(by.xpath(`(//header//a[text() = ${row[i][0]}])[1]`));
+            await browser.wait(ExpectedConditions.visibilityOf(await Searchelement),3000, `${row[i][1]} not found`);
+            await browser.wait(ExpectedConditions.elementToBeClickable(Searchelement), defaultTimeout, "Link doesn,t work");
+            await browser.actions().mouseUp(Searchelement).perform();
+            let color = (await Searchelement.getCssValue("color"));
             await console.log(`Color of ${row[i][0]} is ${color} on hover`)
  
         }
