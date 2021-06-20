@@ -3,7 +3,7 @@ Feature: Final
 
     Test for exam purposes only
     
-#     @smoke
+    @smoke  
     Scenario Outline: I can find my City on 21vek (DDL)
     Given I am on 21 vek page
     When  I Click <Citylink> & enter city name
@@ -26,9 +26,9 @@ Feature: Final
             | "Оплата частями" |
             | "Бонусная программа"|
             | "г. Минск" |
-            |"Еще"|"г. Минск"
+            |"Еще"|
             
-#     @smoke    
+    @smoke    
     Scenario Outline: I can find offers (Checkboxes)
     Given I am on 21 vek page
     When  I click Offer link
@@ -40,7 +40,7 @@ Feature: Final
             | Товары с подарками   | 
             | Суперцена    | 
           
-#     @smoke
+    @smoke
     Scenario: I can select Shipping options(radio-buttons) 
     Given I am on 21 vek-smartphones page
     When  I add the first item to the cart
@@ -48,13 +48,13 @@ Feature: Final
     Then I checkout
     Then I can select Shipping method
 
-#     @smoke
+    @smoke
     Scenario: I check default selection on Iframe
     Given I am on Calorizator page
     When  Click Coffee button
     Then I see default selection
    
-#     @smoke
+    @smoke
     Scenario Outline: I select coffee on Iframe
     Given I am on Calorizator page
     When  Click Coffee button
@@ -69,6 +69,20 @@ Feature: Final
         |Латте Гранде|
         | Kopi Luwak |
         
+    #      @smoke
+    # Scenario Outline: I select coffee on Iframe
+    # Given I am on Calorizator page
+    # When  Click Coffee button
+    # Then I select "<coffee>"
+    # Examples:
+    #     | coffee | 
+    #     |Кофейный напиток | 
+    #     |Эспрессо|
+    #     |Американо|
+    #     # |Каппучино|
+    #     |Латте|
+    #     |Латте Гранде|
+    #     | Kopi Luwak |
 
 
 
