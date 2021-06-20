@@ -55,7 +55,7 @@ export = function tutSteps() {
         await vek.CheckOfferBox(input);
     });
 
-    this.When(/^At least one product is present$/, async () => {
+    this.When(/^At least one product is present on the page$/, async () => {
         await vek.CheckProduckAvailability();
     });
 

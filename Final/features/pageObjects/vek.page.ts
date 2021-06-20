@@ -40,12 +40,12 @@ export class VekPage {
         let row: any = table.rows();
         for(let i = 0; i < row.length; i++){
       
-            let Searchelement_1 = element(by.xpath(`(//header//*[text() = ${row[i][0]}])[1]`));
+            let Searchelement_1 = element(by.xpath(`(//header//a[text() = ${row[i][0]}])[1]`));
             await browser.wait(ExpectedConditions.visibilityOf(await Searchelement_1),3000, `${row[i][1]} not found`);
             await browser.wait(ExpectedConditions.elementToBeClickable(Searchelement_1), defaultTimeout, "Link doesn,t work");
-            await browser.actions().mouseMove(Searchelement_1).perform();
-            let color = (await Searchelement_1.getAttribute("color"));
-            console.log(`Color of ${row[i][0]} is ${color} on hover`)
+            await browser.actions().mouseUp(Searchelement_1).perform();
+            let color = (await Searchelement_1.getCssValue("color"));
+            await console.log(`Color of ${row[i][0]} is ${color} on hover`)
  
         }
         
