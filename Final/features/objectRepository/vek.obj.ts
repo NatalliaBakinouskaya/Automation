@@ -15,7 +15,16 @@ export class VekRepository {
     readonly SelectShippingRadio_2: ElementFinder = element(by.xpath(`//input[@value="self"]`));
     readonly LabelShippingRadio_2: ElementFinder = element(by.xpath(`//*[@id="delivery_self"]`));
     readonly catalogSearchInput: ElementFinder = element(by.css("input#j-search"))
-    readonly foundInCatalog: ElementFinder = element(by.cssContainingText("span", "Найдено"));
+    readonly foundInCatalog: ElementFinder = element(by.cssContainingText("span", "Найден"));
+    readonly repareReturnLink: ElementFinder = element(by.cssContainingText("a", "Замена и возврат товара"));
+    readonly submitRequestButton: ElementFinder = element(by.cssContainingText("a", "Оставить заявку"));
+    readonly fillTheFormButton: ElementFinder = element(by.cssContainingText("button", "Заполнить форму"));
+    readonly noButton1: ElementFinder = element(by.xpath(`(//span[contains(text(), "Нет")]/parent::label)[1]`));
+    readonly noButton2: ElementFinder = element(by.xpath(`(//span[contains(text(), "Нет")]/parent::label)[2]`));
+    readonly radioOtherButton: ElementFinder = element(by.cssContainingText("span", "Beko/Grundik"));
+    readonly noButton3: ElementFinder = element(by.xpath(`(//span[contains(text(), "Нет")]/parent::label)[3]`));
+    readonly forwardButton1: ElementFinder = element(by.xpath(`(//button[text() = "Вперёд"])[5]`));
+    readonly forwardButton2: ElementFinder = element(by.xpath(`(//button[text() = "Вперёд"])[39]`));
 
     
 }

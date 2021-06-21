@@ -1,9 +1,9 @@
-# @smoke
+@smoke
 Feature: Final
 
     Test for exam purposes only
     
-    @smoke  
+#     @smoke   
     Scenario Outline: I can find my City on 21vek (DDL)
     Given I am on 21 vek page
     When  I Click <Citylink> & enter city name
@@ -16,7 +16,7 @@ Feature: Final
             | Витебск    | г. Витебск |
             | аг. Париж    | аг. Париж|
 
-    @smoke
+#     @smoke
     # This scenario is not ready yet
     Scenario: Links are clicable and color on hover
     Given I am on 21 vek page
@@ -28,7 +28,7 @@ Feature: Final
             | "г. Минск" |
             |"Еще"|
             
-    @smoke    
+#     @smoke    
     Scenario Outline: I can find offers (Checkboxes)
     Given I am on 21 vek page
     When  I click Offer link
@@ -40,7 +40,7 @@ Feature: Final
             | Товары с подарками   | 
             | Суперцена    | 
           
-    @smoke
+#     @smoke
     Scenario: I can select Shipping options(radio-buttons) 
     Given I am on 21 vek-smartphones page
     When  I add the first item to the cart
@@ -49,13 +49,13 @@ Feature: Final
     Then I can select Shipping method
 
 
-    @smoke
+#     @smoke
     Scenario: I check default selection on Iframe
     Given I am on Calorizator page
     When  Click Coffee button
     Then I see default selection
    
-    @smoke
+#     @smoke
     Scenario Outline: I select coffee on Iframe
     Given I am on Calorizator page
     When  Click Coffee button
@@ -70,8 +70,8 @@ Feature: Final
         |Латте Гранде|
         | Kopi Luwak |
         
-    @smoke 
-    Scenario Outline: I searc for goods in catalog
+#     @smoke 
+    Scenario Outline: I search for goods in catalog
     Given I am on 21 vek page
     When I Search for <goods>
     Then I see number of items found > 1
@@ -84,7 +84,14 @@ Feature: Final
         |Кукольный дом|
      
 
+#     @smoke
+    Scenario: I check default selection on Iframe
+    Given I am on 21 vek page
+    When  I navigate to repare-return page
+    When I click Submit Request button
+    Then I fill request form and return to 21 vek page
 
+   
 
 
 

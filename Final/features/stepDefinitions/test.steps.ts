@@ -99,5 +99,17 @@ export = function tutSteps() {
     this.When(/^I see number of items found > 1$/, async () => {
         await vek.CheckFoundItems();
     });
+
+    this.When(/^I navigate to repare-return page$/, async () => {
+        await vek.NavigteToRepareReturnPage();
+    });
+
+    this.When(/^I click Submit Request button$/, async () => {
+        await vek.SubmitRequest();
+    });
+
+    this.When(/^I fill request form and return to 21 vek page$/, async () => {
+        await vek.FillRequestForm();
+    });
 }
  

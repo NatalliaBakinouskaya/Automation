@@ -86,19 +86,19 @@ export class VekPage {
     }
     
     public async AddFirstItemToCart() {
-        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.AddToCart), defaultTimeout, "Phones not found");
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.AddToCart), defaultTimeout, "Button not found");
         await this.vekRepo.AddToCart.click();
         // Problem #1 Items are sometimes not added to the cart. Browser sleep helped(
         await browser.sleep(3000);
     }
 
     public async GoToCart() {
-        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.GoToCartButton ), defaultTimeout, "Phones not found");
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.GoToCartButton ), defaultTimeout, "Button not found");
         await this.vekRepo.GoToCartButton.click();
     }
 
     public async Checkout() {
-        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.CheckoutButton ), defaultTimeout, "Phones not found");
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.CheckoutButton ), defaultTimeout, "Button not found");
         await this.vekRepo.CheckoutButton.click();
     }
 
@@ -117,17 +117,66 @@ export class VekPage {
 
     public async SerchInCatalog(good: string): promise.Promise<void> {
         
-        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.catalogSearchInput), defaultTimeout, "City link not found");
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.catalogSearchInput), defaultTimeout, `${good} link not found`);
         await this.vekRepo.catalogSearchInput.sendKeys(`${good}` + Key.ENTER);
         
     }
     public async CheckFoundItems() {
-        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.foundInCatalog), defaultTimeout, "Phones not found");
-        let str = this.vekRepo.foundInCatalog.getText();
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.foundInCatalog), defaultTimeout, `Information about found items is not available`);
+        let str = await this.vekRepo.foundInCatalog.getText();
         // console.log(str);
         let num = (await str).match(/\d+/g).join();
         expect(+num).greaterThan(1);
         // console.log(+num > 0);
     }
-    
+
+    public async NavigteToRepareReturnPage() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.repareReturnLink), defaultTimeout, "Link not found");
+        this.vekRepo.repareReturnLink.click();
+        await browser.wait(ExpectedConditions.urlContains("info/return"), defaultTimeout, "URL was changed")
+    }
+    public async SubmitRequest() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.submitRequestButton), defaultTimeout, "Link not found");
+        this.vekRepo.submitRequestButton.click();
+
+         let allHandles = await browser.getAllWindowHandles();
+        // allHandles.forEach(function(name){
+        //     console.log(name);
+        // })
+        // console.log(await browser.getAllWindowHandles());
+
+        await browser.switchTo().window(allHandles[1]);  
+        await browser.wait(ExpectedConditions.urlContains("form.jotformeu"), defaultTimeout, "URL was changed")
+    }
+    public async FillRequestForm() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.fillTheFormButton), defaultTimeout, "Link not found");
+        await this.vekRepo.fillTheFormButton.click();
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.noButton1), defaultTimeout, "Link not found");
+        await this.vekRepo.noButton1.click();
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.noButton2), defaultTimeout, "Link not found");
+        await this.vekRepo.noButton2.click();
+
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.radioOtherButton), defaultTimeout, "Link not found");
+        await this.vekRepo.radioOtherButton.click();
+
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.noButton3), defaultTimeout, "Link not found");
+        await this.vekRepo.noButton3.click();
+
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.forwardButton1), defaultTimeout, "Link not found");
+        await this.vekRepo.forwardButton1.click();
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.forwardButton2), defaultTimeout, "Link not found");
+        await this.vekRepo.forwardButton2.click();
+
+        let allHandles = await browser.getAllWindowHandles();
+        // allHandles.forEach(function(name){
+        //     console.log(name);
+        // })
+        // console.log(await browser.getAllWindowHandles());
+        await browser.switchTo().window(allHandles[0]);
+
+
+        // await browser.sleep(3000)
+
+        
+    }
 }

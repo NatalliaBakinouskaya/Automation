@@ -32,22 +32,14 @@ export class CalorizatorPage {
         
         //  Works w/o commented code
         // await browser.switchTo().defaultContent();
-
-        // let allHandles = await browser.getAllWindowHandles();
-        // allHandles.forEach(function(name){
-            // console.log(name);
-        // })
-        // console.log(await browser.getAllWindowHandles());
-
-        // await browser.switchTo().window(allHandles[0]);  
     }
     public async SelectEachCoffee(coffeeName: string): promise.Promise<void>  {
         await browser.wait(ExpectedConditions.visibilityOf(await this.calorizatorRepo.coffeeIframe), defaultTimeout, "SearchIframe not found");
         await browser.switchTo().frame(this.calorizatorRepo.coffeeIframe.getWebElement());
 
-        // Problem #3 div[text() = ${coffeeName})] doesn't work
-        // let elem :  ElementFinder = element(by.xpath(`//div[text() = ${coffeeName})]//preceding-sibling::div//child::*`))
-        let elem :  ElementFinder = element(by.xpath(`//div[contains(text(), ${coffeeName})]//preceding-sibling::div//child::*`))
+        // Problem #3 div[text() = ${coffeeName})] doesn't work - RESOLVED!!
+        let elem :  ElementFinder = element(by.xpath(`//div[text() = ${coffeeName}]//preceding-sibling::div//child::*`))
+        // let elem :  ElementFinder = element(by.xpath(`//div[contains(text(), ${coffeeName})]//preceding-sibling::div//child::*`))
         await browser.wait(ExpectedConditions.visibilityOf(await elem), defaultTimeout, "Coffee radio button not found");
         elem.click();
 
