@@ -8,6 +8,4 @@ export class CalorizatorRepository {
     readonly closeIframeButton: ElementFinder = element(by.xpath(`//*[@id="close"]`))
     readonly sorry: ElementFinder = element(by.cssContainingText("a", "Простите, я передумал"))
 
-
-    
 }  

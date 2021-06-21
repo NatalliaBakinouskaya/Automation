@@ -48,6 +48,7 @@ Feature: Final
     Then I checkout
     Then I can select Shipping method
 
+
     @smoke
     Scenario: I check default selection on Iframe
     Given I am on Calorizator page
@@ -69,20 +70,19 @@ Feature: Final
         |Латте Гранде|
         | Kopi Luwak |
         
-    #      @smoke
-    # Scenario Outline: I select coffee on Iframe
-    # Given I am on Calorizator page
-    # When  Click Coffee button
-    # Then I select "<coffee>"
-    # Examples:
-    #     | coffee | 
-    #     |Кофейный напиток | 
-    #     |Эспрессо|
-    #     |Американо|
-    #     # |Каппучино|
-    #     |Латте|
-    #     |Латте Гранде|
-    #     | Kopi Luwak |
+    @smoke 
+    Scenario Outline: I searc for goods in catalog
+    Given I am on 21 vek page
+    When I Search for <goods>
+    Then I see number of items found > 1
+    Examples:
+        | goods | 
+        |Лопата| 
+        |Кирпич|
+        |Цемент|
+        |Сантехника|
+        |Кукольный дом|
+     
 
 
 

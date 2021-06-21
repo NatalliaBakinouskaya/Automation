@@ -115,5 +115,19 @@ export class VekPage {
     
     }
 
+    public async SerchInCatalog(good: string): promise.Promise<void> {
+        
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.catalogSearchInput), defaultTimeout, "City link not found");
+        await this.vekRepo.catalogSearchInput.sendKeys(`${good}` + Key.ENTER);
+        
+    }
+    public async CheckFoundItems() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.foundInCatalog), defaultTimeout, "Phones not found");
+        let str = this.vekRepo.foundInCatalog.getText();
+        // console.log(str);
+        let num = (await str).match(/\d+/g).join();
+        expect(+num).greaterThan(1);
+        // console.log(+num > 0);
+    }
     
 }

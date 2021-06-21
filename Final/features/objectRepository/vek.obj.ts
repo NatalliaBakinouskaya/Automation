@@ -14,5 +14,8 @@ export class VekRepository {
     readonly SelectShippingRadio_1: ElementFinder = element(by.xpath(`//input[@value="courier"]`));
     readonly SelectShippingRadio_2: ElementFinder = element(by.xpath(`//input[@value="self"]`));
     readonly LabelShippingRadio_2: ElementFinder = element(by.xpath(`//*[@id="delivery_self"]`));
+    readonly catalogSearchInput: ElementFinder = element(by.css("input#j-search"))
+    readonly foundInCatalog: ElementFinder = element(by.cssContainingText("span", "Найдено"));
+
     
 }

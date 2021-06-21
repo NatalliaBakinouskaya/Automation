@@ -92,5 +92,12 @@ export = function tutSteps() {
         await calorizator.SelectEachCoffee(input);
     });
 
+    this.When(/^I Search for (.*?)$/, async (input: string) => {
+        await vek.SerchInCatalog(input);
+    });
+
+    this.When(/^I see number of items found > 1$/, async () => {
+        await vek.CheckFoundItems();
+    });
 }
  
