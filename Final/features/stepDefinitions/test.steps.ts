@@ -111,5 +111,13 @@ export = function tutSteps() {
     this.When(/^I fill request form and return to 21 vek page$/, async () => {
         await vek.FillRequestForm();
     });
+
+    this.When(/^I open category page and add items$/, async (tab: TableDefinition) => {
+        await vek.AddItems(tab);
+    });
+    
+    this.Then(/^QTY is reflected on Home Page$/, async () => {
+        await vek.CheckQuontityInTheCart();
+    });
 }
  

@@ -25,6 +25,9 @@ export class VekRepository {
     readonly noButton3: ElementFinder = element(by.xpath(`(//span[contains(text(), "Нет")]/parent::label)[3]`));
     readonly forwardButton1: ElementFinder = element(by.xpath(`(//button[text() = "Вперёд"])[5]`));
     readonly forwardButton2: ElementFinder = element(by.xpath(`(//button[text() = "Вперёд"])[39]`));
+    readonly cartIcon: ElementFinder = element(by.xpath(`//span[text() = "Корзина"]/preceding-sibling::*/child::span`));
+    
+    
 
     
 }

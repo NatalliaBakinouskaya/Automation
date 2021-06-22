@@ -17,8 +17,8 @@ Feature: Final
             | аг. Париж    | аг. Париж|
 
 #     @smoke
-    # This scenario is not ready yet
-    Scenario: Links are clicable and color on hover
+    
+    Scenario: LI check if links are clicable and color on hover(hover)
     Given I am on 21 vek page
     Then  Link is clicable
 
@@ -29,7 +29,7 @@ Feature: Final
             |"Еще"|
             
 #     @smoke    
-    Scenario Outline: I can find offers (Checkboxes)
+    Scenario Outline: I can find offers (checkboxes)
     Given I am on 21 vek page
     When  I click Offer link
     Then I check "<checkbox>"
@@ -54,6 +54,7 @@ Feature: Final
     Given I am on Calorizator page
     When  Click Coffee button
     Then I see default selection
+
    
 #     @smoke
     Scenario Outline: I select coffee on Iframe
@@ -85,13 +86,23 @@ Feature: Final
      
 
 #     @smoke
-    Scenario: I check default selection on Iframe
+    Scenario: I can complete return request (Switch between windows)
     Given I am on 21 vek page
     When  I navigate to repare-return page
     When I click Submit Request button
     Then I fill request form and return to 21 vek page
 
    
+    # @smoke
+    Scenario: I add items to cart and check qty on homepage 
+    Given I am on 21 vek page
+    When  I open category page and add items
+    |category|url|
+    |Холодильники|refrigerators|
+    |Стиральные машины|washing_machines|
+    |Телевизоры|tv|
+    
+    Then QTY is reflected on Home Page
 
 
 

@@ -174,9 +174,38 @@ export class VekPage {
         // console.log(await browser.getAllWindowHandles());
         await browser.switchTo().window(allHandles[0]);
 
-
         // await browser.sleep(3000)
+    }
+    public async AddItems(table: TableDefinition) {
+        let row: any = table.rows();
+        for(let i = 0; i < row.length; i++){
+            let Searchelement: ElementFinder;
+            
+                Searchelement = element(by.cssContainingText("a", row[i][0]));
+          
+            await browser.wait(ExpectedConditions.presenceOf(await Searchelement), defaultTimeout, `${row[i][0]} not found`);
+            // await browser.wait(ExpectedConditions.elementToBeClickable(await Searchelement), defaultTimeout, "Link doesn't work");
+            // await Searchelement.click();
+            await browser.actions().mouseUp(Searchelement).click().perform();
+            await browser.wait(ExpectedConditions.urlContains(row[i][1]), defaultTimeout, "URL was changed");
+            for(let numb = 1; numb <= 3; numb++){
+                // let addButton = await element(by.xpath(`(//button[contains(text(), "В корзину")])[1]`));
+                await browser.wait(ExpectedConditions.visibilityOf(this.vekRepo.AddToCart), defaultTimeout, `Item not found`);
+                await browser.wait(ExpectedConditions.elementToBeClickable(await this.vekRepo.AddToCart), defaultTimeout, "Link doesn't work");
+                await this.vekRepo.AddToCart.click();
+                // await browser.sleep(2000);
+            }
+            browser.navigate().to(browser.params.vek21ByURL);
+            // await browser.actions().mouseUp(Searchelement).perform();
+        } 
+    }  
 
-        
+    public async CheckQuontityInTheCart() {
+        await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.cartIcon), defaultTimeout, `Cart link not found`);
+        let str = await this.vekRepo.cartIcon.getText();
+        console.log(str);
+        let num = (await str).match(/\d+/g).join();
+        expect(+num).equals(9);
+       
     }
 }
