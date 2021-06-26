@@ -119,5 +119,21 @@ export = function tutSteps() {
     this.Then(/^QTY is reflected on Home Page$/, async () => {
         await vek.CheckQuontityInTheCart();
     });
+
+    this.Then(/^I go to analizer and send my recipe$/, async () => {
+        await calorizator.SendRecipe();
+    });
+
+    this.Then(/^I see correct food energy value$/, async () => {
+        await calorizator.CalculateEnergy();
+    });
+
+    this.Then(/^I go to self-pickup page$/, async () => {
+        await vek.GoToSelfPickup();
+    });
+    
+    this.Then(/^I see my pickup-point on the map$/, async (tab: TableDefinition) => {
+        await vek.findPickupPoint(tab);
+    });
 }
  

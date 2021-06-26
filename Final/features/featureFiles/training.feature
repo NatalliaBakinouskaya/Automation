@@ -1,9 +1,9 @@
-@smoke
+# @smoke
 Feature: Final
 
     Test for exam purposes only
     
-#     @smoke   
+    # @smoke   
     Scenario Outline: I can find my City on 21vek (DDL)
     Given I am on 21 vek page
     When  I Click <Citylink> & enter city name
@@ -16,8 +16,7 @@ Feature: Final
             | Витебск    | г. Витебск |
             | аг. Париж    | аг. Париж|
 
-#     @smoke
-    
+   # @smoke
     Scenario: LI check if links are clicable and color on hover(hover)
     Given I am on 21 vek page
     Then  Link is clicable
@@ -26,13 +25,13 @@ Feature: Final
             | "Оплата частями" |
             | "Бонусная программа"|
             | "г. Минск" |
-            |"Еще"|
+            | "Еще" |
             
-#     @smoke    
+    # @smoke    
     Scenario Outline: I can find offers (checkboxes)
     Given I am on 21 vek page
     When  I click Offer link
-    Then I check "<checkbox>"
+    And I check "<checkbox>"
     Then At least one product is present on the page
     Examples:
             | checkbox | 
@@ -40,24 +39,24 @@ Feature: Final
             | Товары с подарками   | 
             | Суперцена    | 
           
-#     @smoke
+    # @smoke 
     Scenario: I can select Shipping options(radio-buttons) 
     Given I am on 21 vek-smartphones page
     When  I add the first item to the cart
-    Then I go to the cart
-    Then I checkout
+    And I go to the cart
+    And I checkout
     Then I can select Shipping method
 
 
-#     @smoke
-    Scenario: I check default selection on Iframe
+    #  @smoke
+    Scenario: I check default selection (Iframe)
     Given I am on Calorizator page
     When  Click Coffee button
     Then I see default selection
 
    
-#     @smoke
-    Scenario Outline: I select coffee on Iframe
+    #  @smoke
+    Scenario Outline: I select coffee (Iframe)
     Given I am on Calorizator page
     When  Click Coffee button
     Then I select "<coffee>"
@@ -66,12 +65,11 @@ Feature: Final
         |Кофейный напиток | 
         |Эспрессо|
         |Американо|
-        # |Каппучино|
         |Латте|
         |Латте Гранде|
-        | Kopi Luwak |
+        |Kopi Luwak|
         
-#     @smoke 
+    # @smoke 
     Scenario Outline: I search for goods in catalog
     Given I am on 21 vek page
     When I Search for <goods>
@@ -85,11 +83,11 @@ Feature: Final
         |Кукольный дом|
      
 
-#     @smoke
+    # @smoke
     Scenario: I can complete return request (Switch between windows)
     Given I am on 21 vek page
     When  I navigate to repare-return page
-    When I click Submit Request button
+    And I click Submit Request button
     Then I fill request form and return to 21 vek page
 
    
@@ -104,5 +102,25 @@ Feature: Final
     
     Then QTY is reflected on Home Page
 
+    # @smoke
+    Scenario: I analize my recipe
+    Given I am on Calorizator page
+    When  I go to analizer and send my recipe
+    Then I see correct food energy value
 
+     @smoke
+    Scenario: I can find self-pikcup-points on the map(DDL)
+    Given I am on 21 vek page
+    When  I go to self-pickup page
+    Then I see my pickup-point on the map
+
+    | street |
+    | Тростенецкая|
+    | Уманская|
+    | Кальварийская|
+    | Ложинская |
+    | Сурганова|
+    # | Победителей|
+
+    
 
