@@ -2,11 +2,10 @@
 import { TableDefinition } from "cucumber";
 // import { browser, by, element, ElementFinder, ExpectedConditions } from "protractor";
 import { BrowserHacks } from "../../support/browserHacks";
-import { CalorizatorPage } from "../pageObjects/calorizator.page";
 import { VekPage } from "../pageObjects/vek.page";
 
 
-export = function tutSteps() {
+export = function vekSteps() {
 
     //Default cucumber timeout
     this.setDefaultTimeout(600 * 1000);
@@ -16,7 +15,7 @@ export = function tutSteps() {
 
     //Loading page object
     let vek = new VekPage;
-    let calorizator = new CalorizatorPage;
+    
    
     //Hooks
     this.Before(async () => {
@@ -29,8 +28,6 @@ export = function tutSteps() {
     });
 
     //Step Definitions
-
-    //Given expression, can only be used with Given in .feature file
    
     this.Given(/^I am on 21 vek page$/, async () => {
         await vek.Open();
@@ -55,11 +52,11 @@ export = function tutSteps() {
         await vek.CheckOfferBox(input);
     });
 
-    this.When(/^At least one product is present on the page$/, async () => {
+    this.Then(/^At least one product is present on the page$/, async () => {
         await vek.CheckProduckAvailability();
     });
 
-    this.When(/^I am on 21 vek-smartphones page$/, async () => {
+    this.Given(/^I am on 21 vek-smartphones page$/, async () => {
         await vek.OpenMobilePage();
     });
     this.When(/^I add the first item to the cart$/, async () => {
@@ -72,31 +69,16 @@ export = function tutSteps() {
     this.When(/^I checkout$/, async () => {
         await vek.Checkout();
     });
-    this.When(/^I can select Shipping method$/, async () => {
+    this.Then(/^I can select Shipping method$/, async () => {
         await vek.SelectShippingMethod();
     });
 
-    this.Given(/^I am on Calorizator page$/, async () => {
-        await calorizator.Open();
-    });
-
-    this.Given(/^Click Coffee button$/, async () => {
-        await calorizator.ClickCoffeeButton();
-    });
-
-    this.Given(/^I see default selection$/, async () => {
-        await calorizator.CheckCapuchSelected();
-    });
-
-    this.Then(/^I select (.*?)$/, async (input: string) => {
-        await calorizator.SelectEachCoffee(input);
-    });
 
     this.When(/^I Search for (.*?)$/, async (input: string) => {
         await vek.SerchInCatalog(input);
     });
 
-    this.When(/^I see number of items found > 1$/, async () => {
+    this.Then(/^I see number of items found > 1$/, async () => {
         await vek.CheckFoundItems();
     });
 
@@ -108,7 +90,7 @@ export = function tutSteps() {
         await vek.SubmitRequest();
     });
 
-    this.When(/^I fill request form and return to 21 vek page$/, async () => {
+    this.Then(/^I fill request form and return to 21 vek page$/, async () => {
         await vek.FillRequestForm();
     });
 
@@ -116,19 +98,11 @@ export = function tutSteps() {
         await vek.AddItems(tab);
     });
     
-    this.Then(/^QTY is reflected on Home Page$/, async () => {
+    this.Then(/^QTY of items in Cart is reflected on Home Page$/, async () => {
         await vek.CheckQuontityInTheCart();
     });
 
-    this.Then(/^I go to analizer and send my recipe$/, async () => {
-        await calorizator.SendRecipe();
-    });
-
-    this.Then(/^I see correct food energy value$/, async () => {
-        await calorizator.CalculateEnergy();
-    });
-
-    this.Then(/^I go to self-pickup page$/, async () => {
+    this.When(/^I go to self-pickup page$/, async () => {
         await vek.GoToSelfPickup();
     });
     

@@ -16,7 +16,7 @@ exports.config = {
     params: {
         defaultTimeout: 30000,
         onlinerByURL: "https://www.onliner.by/",
-        tutByURL: "https://www.tut.by",
+        // tutByURL: "https://www.tut.by",
         vek21ByURL:"https://www.21vek.by",
         calorizatorByURL: "https://calorizator.ru/",
     },
@@ -73,7 +73,7 @@ exports.config = {
         //-----------------------------------------
         //TODO: Optimize logger for parallel mode
         shardTestFiles: true,
-        maxInstances: 1,
+        maxInstances: 3,
         chromeOptions: {
             //Standard mode
             //args: ["--window-size=1920,1080"]

@@ -47,8 +47,6 @@ export class VekPage {
             else{
                 Searchelement = element(by.xpath(`//*[text() = ${row[i][0]}]/parent::*`));
             }
-
-            // Searchelement = element(by.xpath(`(//header//a[text() = ${row[i][0]}])[1]`));
             await browser.wait(ExpectedConditions.visibilityOf(await Searchelement),3000, `${row[i][1]} not found`);
             await browser.wait(ExpectedConditions.elementToBeClickable(Searchelement), defaultTimeout, "Link doesn,t work");
             await browser.actions().mouseUp(Searchelement).perform();
@@ -88,8 +86,9 @@ export class VekPage {
     public async AddFirstItemToCart() {
         await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.AddToCart), defaultTimeout, "Button not found");
         await this.vekRepo.AddToCart.click();
-        // Problem #1 Items are sometimes not added to the cart. Browser sleep helped(
-        await browser.sleep(3000);
+        // Problem #1 Items are sometimes not added to the cart. Browser sleep helped( -resolved
+        await browser.wait(ExpectedConditions.presenceOf(element(by.xpath(`(//a[contains(text(), "В корзине")])[1]`))), defaultTimeout, `Item not added to cart`);
+        // await browser.sleep(3000);
     }
 
     public async GoToCart() {
@@ -124,7 +123,6 @@ export class VekPage {
     public async CheckFoundItems() {
         await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.foundInCatalog), defaultTimeout, `Information about found items is not available`);
         let str = await this.vekRepo.foundInCatalog.getText();
-        // console.log(str);
         let num = (await str).match(/\d+/g).join();
         expect(+num).greaterThan(1);
         // console.log(+num > 0);
@@ -174,7 +172,7 @@ export class VekPage {
         // console.log(await browser.getAllWindowHandles());
         await browser.switchTo().window(allHandles[0]);
 
-        // await browser.sleep(3000)
+     
     }
     public async AddItems(table: TableDefinition) {
         let row: any = table.rows();
@@ -184,19 +182,19 @@ export class VekPage {
                 Searchelement = element(by.cssContainingText("a", row[i][0]));
           
             await browser.wait(ExpectedConditions.presenceOf(await Searchelement), defaultTimeout, `${row[i][0]} not found`);
-            // await browser.wait(ExpectedConditions.elementToBeClickable(await Searchelement), defaultTimeout, "Link doesn't work");
-            // await Searchelement.click();
+            
             await browser.actions().mouseUp(Searchelement).click().perform();
             await browser.wait(ExpectedConditions.urlContains(row[i][1]), defaultTimeout, "URL was changed");
             for(let numb = 1; numb <= 3; numb++){
-                // let addButton = await element(by.xpath(`(//button[contains(text(), "В корзину")])[1]`));
-            await browser.wait(ExpectedConditions.visibilityOf(this.vekRepo.AddToCart), defaultTimeout, `Item not found`);
-            await browser.wait(ExpectedConditions.elementToBeClickable(await this.vekRepo.AddToCart), defaultTimeout, "Link doesn't work");
-            await this.vekRepo.AddToCart.click();
-                // await browser.sleep(2000);
+               
+                await browser.wait(ExpectedConditions.visibilityOf(this.vekRepo.AddToCart), defaultTimeout, `Item not found`);
+                
+                await this.vekRepo.AddToCart.click();
+                await browser.wait(ExpectedConditions.presenceOf(element(by.xpath(`(//a[contains(text(), "В корзине")])[${numb}]`))), defaultTimeout, `Item not added to cart`);
+               
             }
             browser.navigate().to(browser.params.vek21ByURL);
-            // await browser.actions().mouseUp(Searchelement).perform();
+           
         } 
     }  
 
@@ -219,18 +217,17 @@ export class VekPage {
 
     public async findPickupPoint(table: TableDefinition) {
         
-        // await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.mapMinusButton), defaultTimeout);
-        // await this.vekRepo.mapMinusButton.click();
-
         let row: any = table.rows();
         for(let i = 0; i < row.length; i++){
+            if(i == 0){
+            await browser.wait(ExpectedConditions.presenceOf(await this.vekRepo.pickupPoint6), defaultTimeout, `Point ${row[i][0]} not found`);
+            await browser.actions().mouseUp(this.vekRepo.pickupPoint6).click().perform();
+            }
+            else{
+                await browser.wait(ExpectedConditions.presenceOf(await this.vekRepo.pickupPoint), defaultTimeout, `Point ${row[i][0]} not found`);
+                await browser.actions().mouseUp(this.vekRepo.pickupPoint).click().perform(); 
+            }
             
-            await browser.wait(ExpectedConditions.presenceOf(await this.vekRepo.pickupPoint), defaultTimeout, `Point ${row[i][0]} not found`);
-           
-            await browser.actions().mouseUp(this.vekRepo.pickupPoint).click().perform();
-            // await this.vekRepo.pickupPoint.click();
-            await browser.sleep(3000);
-
             await browser.wait(ExpectedConditions.visibilityOf(element(by.xpath(`//ymaps[contains(text(), "${row[i][0]}")]`))), defaultTimeout, `${row[i][0]} not found`);
             
             await browser.wait(ExpectedConditions.visibilityOf(await this.vekRepo.closeButton), defaultTimeout, `Can't close`);

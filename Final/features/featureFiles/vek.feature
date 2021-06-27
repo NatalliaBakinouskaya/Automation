@@ -1,5 +1,6 @@
-# @smoke
-Feature: Final
+@smoke
+Feature: All I know (ecxept Iframe & API) feature for exam
+
 
     Test for exam purposes only
     
@@ -11,12 +12,11 @@ Feature: Final
     Examples:
             | Citylink | city   |
             | Гомель     |г. Гомель  |
-            # | Минск    | г. Минск |
             | Могилев    | г. Могилев |
             | Витебск    | г. Витебск |
             | аг. Париж    | аг. Париж|
 
-   # @smoke
+    #  @smoke 
     Scenario: LI check if links are clicable and color on hover(hover)
     Given I am on 21 vek page
     Then  Link is clicable
@@ -31,7 +31,7 @@ Feature: Final
     Scenario Outline: I can find offers (checkboxes)
     Given I am on 21 vek page
     When  I click Offer link
-    And I check "<checkbox>"
+    When I check "<checkbox>"
     Then At least one product is present on the page
     Examples:
             | checkbox | 
@@ -39,35 +39,14 @@ Feature: Final
             | Товары с подарками   | 
             | Суперцена    | 
           
-    # @smoke 
+    @smoke 
     Scenario: I can select Shipping options(radio-buttons) 
     Given I am on 21 vek-smartphones page
     When  I add the first item to the cart
-    And I go to the cart
-    And I checkout
+    When I go to the cart
+    When I checkout
     Then I can select Shipping method
 
-
-    #  @smoke
-    Scenario: I check default selection (Iframe)
-    Given I am on Calorizator page
-    When  Click Coffee button
-    Then I see default selection
-
-   
-    #  @smoke
-    Scenario Outline: I select coffee (Iframe)
-    Given I am on Calorizator page
-    When  Click Coffee button
-    Then I select "<coffee>"
-    Examples:
-        | coffee | 
-        |Кофейный напиток | 
-        |Эспрессо|
-        |Американо|
-        |Латте|
-        |Латте Гранде|
-        |Kopi Luwak|
         
     # @smoke 
     Scenario Outline: I search for goods in catalog
@@ -84,10 +63,10 @@ Feature: Final
      
 
     # @smoke
-    Scenario: I can complete return request (Switch between windows)
+    Scenario: I can complete return-request (Switch between windows)
     Given I am on 21 vek page
     When  I navigate to repare-return page
-    And I click Submit Request button
+    When I click Submit Request button
     Then I fill request form and return to 21 vek page
 
    
@@ -95,32 +74,28 @@ Feature: Final
     Scenario: I add items to cart and check qty on homepage 
     Given I am on 21 vek page
     When  I open category page and add items
+
     |category|url|
     |Холодильники|refrigerators|
     |Стиральные машины|washing_machines|
     |Телевизоры|tv|
     
-    Then QTY is reflected on Home Page
+    Then QTY of items in Cart is reflected on Home Page
 
     # @smoke
-    Scenario: I analize my recipe
-    Given I am on Calorizator page
-    When  I go to analizer and send my recipe
-    Then I see correct food energy value
-
-     @smoke
     Scenario: I can find self-pikcup-points on the map(DDL)
     Given I am on 21 vek page
     When  I go to self-pickup page
     Then I see my pickup-point on the map
 
     | street |
+    | Победителей|
     | Тростенецкая|
     | Уманская|
     | Кальварийская|
     | Ложинская |
     | Сурганова|
-    # | Победителей|
+    
 
     
 

@@ -29,6 +29,8 @@ export class VekRepository {
     readonly elseButton1: ElementFinder = element(by.xpath(`(//button[text() = "Еще"])[1]`));
     readonly pickupPageLink1: ElementFinder = element(by.xpath(`(//a[text() = "Самовывоз"])[1]`));
     readonly pickupPoint: ElementFinder = element(by.xpath(`(//ymaps[@class ="ymaps-2-1-78-placemark__content"])[1]`));
+    readonly pickupPoint6: ElementFinder = element(by.xpath(`(//ymaps[@class ="ymaps-2-1-78-placemark__content"])[6]`));
+
     readonly closeButton: ElementFinder = element(by.css("ymaps.ymaps-2-1-78-balloon__close-button"));
     readonly mapMinusButton: ElementFinder = element(by.css("ymaps.ymaps-2-1-78-zoom__minus.ymaps-2-1-78-zoom__button.ymaps-2-1-78-float-button.ymaps-2-1-78-user-selection-none"));
 
