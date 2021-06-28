@@ -40,7 +40,6 @@ export class CalorizatorPage {
 
         // Problem #3 div[text() = ${coffeeName})] doesn't work - RESOLVED!!
         let elem :  ElementFinder = element(by.xpath(`//div[text() = ${coffeeName}]//preceding-sibling::div//child::*`))
-        // let elem :  ElementFinder = element(by.xpath(`//div[contains(text(), ${coffeeName})]//preceding-sibling::div//child::*`))
         await browser.wait(ExpectedConditions.visibilityOf(await elem), defaultTimeout, "Coffee radio button not found");
         elem.click();
 
